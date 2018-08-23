@@ -91,9 +91,5 @@
                 </div>
             </div>
         </div>
-        <form action="http://localhost/kursy/KUVI/laravel_ss/public/index.php/test" method="post">
-            {{csrf_field()}}
-            <button type="submit">Przeslij</button>
-        </form>
     </body>
 </html>

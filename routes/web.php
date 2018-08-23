@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test/{parametr?}', function($parametr = NULL)
-{
-    return 'Hello World '. $parametr;
-})->where('parametr', '[0-9]+');
+// Route::get('/test/{parametr?}', function($parametr = NULL)
+// {
+//     return 'Hello World '. $parametr;
+// })->where('parametr', '[0-9]+');
