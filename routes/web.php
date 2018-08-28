@@ -14,8 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
 
-// Route::get('/test/{parametr?}', function($parametr = NULL)
-// {
-//     return 'Hello World '. $parametr;
-// })->where('parametr', '[0-9]+');
+Route::get('/home', 'HomeController@index')->name('home');
