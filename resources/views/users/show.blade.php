@@ -5,7 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-3">
         <div class="card">
-                <div class="card-header">Dane Użytkownika</div>
+                <div class="card-header">
+                    Użytkownik
+                    @if ($user->id === Auth::id())
+                        <a href="{{ url('/users/' . $user->id) .'/edit/' }}">Edit</a>
+                    @endif
+                </div>
 
                 <div class="card-body text-center">
                     <h2><a href="{{ url('/users/' . $user->id) }}">{{ $user->name }}</a></h2>
