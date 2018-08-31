@@ -63,13 +63,21 @@ class UsersController extends Controller
             'unique' => 'Inny użytkownik ma już taki e-mail',
             'min' => 'Pole musi miec minimum :min',
         ]);
+        //Upload Photo
         
         $user= User::findOrFail($id);
         $user->name =$request->name;
         $user->email =$request->email;
         $user->sex =$request->sex;
+        if($request->file('avatar')){
+            $user_avatar_path = 'public/users/' . $id . '/avatars';
+            $upload_path = $request->file('avatar')->store($user_avatar_path);
+            $avatar_filename = str_replace($user_avatar_path . '/', '', $upload_path);
+            $user->avatar = $avatar_filename;
+        }
+
         $user->save();
-        
+
         return back();
     }
 

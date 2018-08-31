@@ -7,12 +7,29 @@
             <div class="card">
             <div class="card-header">Edycja Użytkownika {{$user->id}}</div>
                 <div class="card-body">
-                    <form action="{{url('/users/' . $user->id)}}" method="post">
+                <!-- Avatar -->
+                <img src="{{ asset('storage/users/' . $user->id . '/avatars/' . $user->avatar )}}" alt="" class="img-responsive">
+
+                    <form action="{{url('/users/' . $user->id)}}" method="post" enctype="multipart/form-data" >
                         {{csrf_field()}}
                         {{method_field('PATCH')}}
                         
                         <div class="row">
-                            <div class="col-sm-10">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Avatar:</label>
+                                    <input type="file" name="avatar" class="form-control" placeholder="wybierz plik">
+                                    @if ($errors->has('avatar'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('avatar') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="">Imię i Nazwisko:</label>
                                     <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ $user->name }}">
@@ -24,8 +41,9 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-sm-5">
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                 <label for="sex">Płeć</label>
                                     <select class="form-control" id="sex" class="form-control" name="sex">
@@ -35,8 +53,9 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-sm-10">
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="">e-mail:</label>
                                     <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ $user->email }}">
@@ -48,6 +67,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <button type="submit" class="btn btn-primary btn-sm pull-right">Zapisz zmiany</button>
                     </form>
                 </div>   
