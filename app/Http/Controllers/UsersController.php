@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -50,6 +50,20 @@ class UsersController extends Controller
             abort(403, 'brak dostepu');
         }
 
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($id),
+            ],
+        ], [
+            'required' => 'Pole jest wymagane',
+            'email' => 'adres email wymagany',
+            'unique' => 'Inny użytkownik ma już taki e-mail',
+            'min' => 'Pole musi miec minimum :min',
+        ]);
+        
         $user= User::findOrFail($id);
         $user->name =$request->name;
         $user->email =$request->email;
