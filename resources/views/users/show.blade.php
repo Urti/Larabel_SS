@@ -3,25 +3,28 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-3">
-        <div class="card">
-                <div class="card-header">
-                    Użytkownik
-                    @if ($user->id === Auth::id())
-                        <a href="{{ url('/users/' . $user->id) .'/edit/' }}">Edit</a>
-                    @endif
-                </div>
+        <div class="col-md-3 col-md-offset-1">
+            <div class="card">
+                    <div class="card-header">
+                        Użytkownik
+                        @if ($user->id === Auth::id())
+                            <a href="{{ url('/users/' . $user->id) .'/edit/' }}"class="float-right">Edit</a>
+                        @endif
+                    </div>
 
-                <div class="card-body text-center">
-                    <h2><a href="{{ url('/users/' . $user->id) }}">{{ $user->name }}</a></h2>
-                    <p>@if($user->sex == 'm')
-                        Mężczyzna
-                    @else
-                        Kobieta
-                    @endif</p>
-                    <p>{{ $user->email }}</p>
+                    <div class="card-body text-center">
+                        <img src="{{url('/user-avatar/'. $user->id .'/250')}}" alt="" class="img-fluid img-thumbnail">
+                        <br>
+                        <h2><a href="{{ url('/users/' . $user->id) }}">{{ $user->name }}</a></h2>
+                        <p>
+                        @if($user->sex == 'm')
+                            Mężczyzna
+                        @else
+                            Kobieta
+                        @endif</p>
+                        <p>{{ $user->email }}</p>
 
-                </div>
+                    </div>
             </div>
 
         </div>

@@ -8,7 +8,9 @@
             <div class="card-header">Edycja Użytkownika {{$user->id}}</div>
                 <div class="card-body">
                 <!-- Avatar -->
-                <img src="{{ asset('storage/users/' . $user->id . '/avatars/' . $user->avatar )}}" alt="" class="img-responsive">
+                <div class="text-center">
+                    <img src="{{url('/user-avatar/'. $user->id .'/400')}}" alt="" class="img-fluid img-thumbnail">
+                </div>
 
                     <form action="{{url('/users/' . $user->id)}}" method="post" enctype="multipart/form-data" >
                         {{csrf_field()}}
