@@ -33,9 +33,11 @@ class DatabaseSeeder extends Seeder
             switch ($sex) {
                 case 'm':
                     $name = $faker->firstNameMale . ' ' . $faker->lastNameMale;
+                    $avatar = json_decode(file_get_contents('https://randomuser.me/api/?gender=male'))->results[0]->picture->large;
                     break;
                 case 'f':
-                $name = $faker->firstNameFemale . ' ' . $faker->lastNameFemale;
+                    $name = $faker->firstNameFemale . ' ' . $faker->lastNameFemale;
+                    $avatar = json_decode(file_get_contents('https://randomuser.me/api/?gender=female'))->results[0]->picture->large;
                     break;
                 
             }
@@ -44,6 +46,7 @@ class DatabaseSeeder extends Seeder
                 'name' => $name,
                 'email' => str_replace('-', '', str_slug($name)) . '@' . $faker->safeEmailDomain,
                 'sex' => $sex,
+                'avatar' => $avatar,
                 'password' => bcrypt($password),
             ]);
         }
