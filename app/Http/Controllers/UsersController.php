@@ -9,6 +9,12 @@ use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission',['except' => ['show']]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -29,10 +35,6 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        if ($id != Auth::id()) {
-            abort(403, 'brak dostepu');
-        }
-
         $user = Auth::user();
         return view('users.edit', compact('user'));
     }
@@ -46,10 +48,6 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($id != Auth::id()) {
-            abort(403, 'brak dostepu');
-        }
-
         $this->validate($request, [
             'name' => 'required|min:3',
             'email' => [
@@ -79,16 +77,5 @@ class UsersController extends Controller
         $user->save();
 
         return back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
